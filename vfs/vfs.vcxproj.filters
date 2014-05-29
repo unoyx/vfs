@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="vfs">
+      <UniqueIdentifier>{af3536e4-d903-49f4-9dab-b577298e069f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="command">
+      <UniqueIdentifier>{9237da39-3802-4af8-a743-3c0986b5371f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyString.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="App.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DirHandler.cpp">
+      <Filter>vfs</Filter>
+    </ClCompile>
+    <ClCompile Include="DirIterator.cpp">
+      <Filter>vfs</Filter>
+    </ClCompile>
+    <ClCompile Include="DirNode.cpp">
+      <Filter>vfs</Filter>
+    </ClCompile>
+    <ClCompile Include="FileHandler.cpp">
+      <Filter>vfs</Filter>
+    </ClCompile>
+    <ClCompile Include="FileNode.cpp">
+      <Filter>vfs</Filter>
+    </ClCompile>
+    <ClCompile Include="VfsNode.cpp">
+      <Filter>vfs</Filter>
+    </ClCompile>
+    <ClCompile Include="VirtualFileSystem.cpp">
+      <Filter>vfs</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandFactory.cpp">
+      <Filter>command</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandCd.cpp">
+      <Filter>command</Filter>
+    </ClCompile>
+    <ClCompile Include="SmartPtr.h">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandDir.cpp">
+      <Filter>command</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandCompare.cpp">
+      <Filter>command</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandCopy.cpp">
+      <Filter>command</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandMkdir.cpp">
+      <Filter>command</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandRmdir.cpp">
+      <Filter>command</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandDel.cpp">
+      <Filter>command</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandParser.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="path.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandInterface.cpp">
+      <Filter>command</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandException.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MyString.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="App.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="VfsNode.h">
+      <Filter>vfs</Filter>
+    </ClInclude>
+    <ClInclude Include="VirtualFileSystem.h">
+      <Filter>vfs</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>vfs</Filter>
+    </ClInclude>
+    <ClInclude Include="FileNode.h">
+      <Filter>vfs</Filter>
+    </ClInclude>
+    <ClInclude Include="FileHandler.h">
+      <Filter>vfs</Filter>
+    </ClInclude>
+    <ClInclude Include="DirNode.h">
+      <Filter>vfs</Filter>
+    </ClInclude>
+    <ClInclude Include="DirIterator.h">
+      <Filter>vfs</Filter>
+    </ClInclude>
+    <ClInclude Include="DirHandler.h">
+      <Filter>vfs</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandFactory.h">
+      <Filter>command</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandInterface.h">
+      <Filter>command</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandCd.h">
+      <Filter>command</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandDir.h">
+      <Filter>command</Filter>
+    </ClInclude>
+    <ClInclude Include="path.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandCompare.h">
+      <Filter>command</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandCopy.h">
+      <Filter>command</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandMkdir.h">
+      <Filter>command</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandRmdir.h">
+      <Filter>command</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandDel.h">
+      <Filter>command</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandParser.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DelegateMem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandException.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
