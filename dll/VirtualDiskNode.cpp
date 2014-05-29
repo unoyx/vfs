@@ -12,10 +12,15 @@
 #include "DirHandler.h"
 #include "VolumnNode.h"
 
+#ifdef _DEBUG
+#include "vld.h"
+#endif
+
 VirtualDiskNode::VirtualDiskNode(void)
-    :m_pwd(_T("C:"))
+    :m_pwv(_T("C:"))
 {
     (void)addVolumn(_T("C:"));
+    (void)addVolumn(_T("D:"));
 }
 
 VirtualDiskNode::~VirtualDiskNode(void)
@@ -72,7 +77,7 @@ VolumnNode* VirtualDiskNode::getVolumnRef(int i)
     return &m_volumns[i];
 }
 
-int VirtualDiskNode::findVolumn(MyString label)
+int VirtualDiskNode::findVolumn(MyString label) const
 {
     int i = 0;
     for (; i < m_volumns.size(); ++i)
@@ -340,9 +345,46 @@ int VirtualDiskNode::chdir(MyString path)
     {
         path = pathNormalize(path);
     }
-    path[0] = _T('C');
-    m_pwd = path;
+    path = path.toLower();
+
+    MyString volumn = path.substr(0, 2);
+    int idx = findVolumn(volumn);
+    if (idx == -1)
+    {
+        return -1;
+    }
+    VolumnNode* v = getVolumnRef(idx);
+    v->set_pwd(path.substr(2));
+
     return 0;
+}
+
+MyString VirtualDiskNode::pwd(void) const
+{
+    int idx = findVolumn(m_pwv);
+    if (idx == -1)
+    {
+        return m_pwv;
+    }
+    VolumnNode* v = const_cast<VirtualDiskNode*>(this)->getVolumnRef(idx);
+    MyString ret = v->get_pwd();
+    ret = join(m_pwv, ret);
+    return ret;
+}
+
+int VirtualDiskNode::changeVolumn(MyString path)
+{
+    if (path.size() != 2 || !_istalpha(path[0]) || path[1] != _T(':'))
+    {
+        return -1;
+    }
+    m_pwv = path;
+    return 0;
+}
+
+MyString VirtualDiskNode::pwv(void) const
+{
+    return m_pwv;
 }
 
 // 不改变路径中的大小写情况
@@ -354,44 +396,38 @@ MyString VirtualDiskNode::pathNormalize(MyString path) const
         assert(0);
         return ret;
     }
-    if (isRelative(path))
+    if (isVolumnRelative(path))
+    {
+        ret = join(pwd().substr(0, 2), path);
+    }
+    else if (isRelative(path))
     {
         if (path == _T("."))
         {
-            ret = m_pwd;
+            ret = pwd();
         }
         else if (path == _T(".."))
         {
-            ret = dirname(m_pwd);
+            ret = dirname(pwd());
         }
         else if (path.startWith(_T("..\\")))
         {
-            ret = dirname(m_pwd) + path.substr(2);
+            ret = dirname(pwd()) + path.substr(2);
         } 
         else if (path.startWith(_T(".\\")))
         {
-            ret = m_pwd + path.substr(1);
+            ret = pwd() + path.substr(1);
         }
         // 直接输入名字的情况
         else if (!match(path, _T("?:*")))
         {
-            ret = m_pwd + _T("\\") + path;
+            ret = join(pwd(), path);
         }
     } 
-    // 绝对路径中处理：\dir\file的情况
-    else if (path.startWith(_T("\\")))
-    {
-        ret = _T("c:") + path;
-    }
 
     if (path.endWith(_T("\\")))
     {
         ret = ret.substr(0, ret.size() - 1);
     }
     return ret;
-}
-
-MyString VirtualDiskNode::pwd(void) const
-{
-    return m_pwd;
 }

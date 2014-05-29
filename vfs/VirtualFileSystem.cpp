@@ -285,7 +285,11 @@ MyString VirtualDiskNode::pathNormalize(MyString path) const
         assert(0);
         return ret;
     }
-    if (isRelative(path))
+    if (isVolumnRelative(path))
+    {
+        ret = join(m_pwd.substr(0, 2), path);
+    }
+    else if (isRelative(path))
     {
         if (path == _T("."))
         {
@@ -310,10 +314,10 @@ MyString VirtualDiskNode::pathNormalize(MyString path) const
         }
     } 
     // 绝对路径中处理：\dir\file的情况
-    else if (path.startWith(_T("\\")))
-    {
-        ret = _T("c:") + path;
-    }
+    //else if (path.startWith(_T("\\")))
+    //{
+    //    ret = _T("c:") + path;
+    //}
 
     if (path.endWith(_T("\\")))
     {

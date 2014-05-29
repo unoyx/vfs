@@ -4,6 +4,8 @@
 #include "MyString.h"
 #include "CommandParser.h"
 #include "CommandInterface.h"
+#include "CommandPrompt.h"
+#include "CommandChangeVolumn.h"
 #include "CommandCd.h"
 #include "CommandCompare.h"
 #include "CommandCopy.h"
@@ -27,9 +29,19 @@ SmartPtr<CommandInterface> CommandFactory::create(const MyString& command)
     Vector<MyString> pathes;
     Vector<MyString> switches;
     int flag = parse(command, &name, &pathes, &switches);
-    if (name.isEmpty() || flag == -1)
+
+    if (name.isEmpty())
     {
-        throw CommandException(_T("无法识别的命令\n"));
+        if (pathes.size() == 1
+            && _istalpha(pathes[0][0])
+            && pathes[0][1] == _T(':'))
+        {
+            name = _T("change_volumn");
+        }
+        if (flag == -1)
+        {
+            throw CommandException(_T("无法识别的命令\n"));
+        }
     }
     name = name.toLower();
     for (int i = 0; i < switches.size(); ++i)
@@ -37,7 +49,15 @@ SmartPtr<CommandInterface> CommandFactory::create(const MyString& command)
         switches[i] = switches[i].toLower();
     }
     SmartPtr<CommandInterface> ret;
-    if (name == _T("cd"))
+    if (name == _T("prompt"))
+    {
+        ret = SmartPtr<CommandInterface>(new CommandPrompt);
+    }
+    else if (name == _T("change_volumn"))
+    {
+        ret = SmartPtr<CommandInterface>(new CommandChangeVolumn);
+    }
+    else if (name == _T("cd"))
     {
         ret = SmartPtr<CommandInterface>(new CommandCd);
     }

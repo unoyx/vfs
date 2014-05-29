@@ -238,7 +238,7 @@ MyString operator+(const MyString& lhs, const MyString& rhs)
     assert(ndata);
     memcpy(ndata, lhs.m_data, lhs.m_size * sizeof(TCHAR));
     memcpy(ndata + lhs.m_size, rhs.m_data, rhs.m_size * sizeof(TCHAR));
-    ndata[lhs.m_size + rhs.m_size] = '\0';
+    ndata[lhs.m_size + rhs.m_size] = _T('\0');
     delete[] temp.m_data;
     temp.m_data = ndata;
     temp.m_size = lhs.m_size + rhs.m_size;

@@ -26,7 +26,7 @@ void App::run(void)
     TCHAR buf[MAX_CMD_SIZE + 1] = {0};
     for (;;)
     {
-        _tprintf(_T("C:\\>"));
+        (void)m_vdisk->ExecCommand(_T("prompt"));
         memset(buf, 0, sizeof(buf));
         TCHAR* ret_t = _fgetts(buf, MAX_CMD_SIZE, stdin);
         if (ret_t == NULL && errno != EINVAL)

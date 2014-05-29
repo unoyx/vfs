@@ -3,10 +3,12 @@
 #include "path.h"
 
 VolumnNode::VolumnNode(void)
+    :m_pwd(_T(""))
 {
 }
 
 VolumnNode::VolumnNode(const MyString& label)
+    :m_pwd(_T(""))
 {
     setLabel(label);
     DirNode* self = m_root.addSubDir();
@@ -26,7 +28,7 @@ void VolumnNode::setLabel(const MyString& label)
     m_root.set_name(label);
 }
 
-MyString VolumnNode::getLabel(void)
+MyString VolumnNode::getLabel(void) const
 {
     return m_root.get_name();
 }
@@ -34,4 +36,14 @@ MyString VolumnNode::getLabel(void)
 IDirProxy* VolumnNode::GetRootDir(void)
 {
     return &m_root;
+}
+
+void VolumnNode::set_pwd(MyString path)
+{
+    m_pwd = path;
+}
+
+MyString VolumnNode::get_pwd(void) const
+{
+    return m_pwd;
 }

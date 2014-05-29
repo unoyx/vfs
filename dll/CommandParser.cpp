@@ -58,6 +58,9 @@ static int getCmd(const MyString& cmd, int pos, MyString* name)
     int j = i;
     while (j < cmd.size() && _istalpha(cmd[j]))
         ++j;
+    // 无法识别出命令名则回溯
+    if (j < cmd.size() && !_istspace(cmd[j]))
+        return i;
 
     *name = cmd.substr(i, j - i);
     return j;
@@ -77,7 +80,7 @@ int parse(const MyString& cmd, MyString* name, Vector<MyString>* pathes, Vector<
     if (i == cmd.size())
     {
         return 0;
-    }
+    } 
 
     for (; i < cmd.size();)
     {

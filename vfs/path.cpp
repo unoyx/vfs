@@ -226,7 +226,7 @@ Vector<MyString> split(const MyString& path)
 
 MyString join(MyString path, MyString name)
 {
-    if (path[path.size() - 1] != _T('\\'))
+    if (path[path.size() - 1] != _T('\\') && !name.isEmpty() && !name.startWith(_T("\\")))
     {
         path += _T("\\");
     }

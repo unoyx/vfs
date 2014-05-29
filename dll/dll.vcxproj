@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommandCd.h" />
+    <ClInclude Include="CommandChangeVolumn.h" />
     <ClInclude Include="CommandCompare.h" />
     <ClInclude Include="CommandCopy.h" />
     <ClInclude Include="CommandDel.h" />
@@ -21,6 +22,7 @@
     <ClInclude Include="CommandInterface.h" />
     <ClInclude Include="CommandMkdir.h" />
     <ClInclude Include="CommandParser.h" />
+    <ClInclude Include="CommandPrompt.h" />
     <ClInclude Include="CommandRmdir.h" />
     <ClInclude Include="DelegateMem.h" />
     <ClInclude Include="DirHandler.h" />
@@ -42,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommandCd.cpp" />
+    <ClCompile Include="CommandChangeVolumn.cpp" />
     <ClCompile Include="CommandCompare.cpp" />
     <ClCompile Include="CommandCopy.cpp" />
     <ClCompile Include="CommandDel.cpp" />
@@ -51,6 +54,7 @@
     <ClCompile Include="CommandInterface.cpp" />
     <ClCompile Include="CommandMkdir.cpp" />
     <ClCompile Include="CommandParser.cpp" />
+    <ClCompile Include="CommandPrompt.cpp" />
     <ClCompile Include="CommandRmdir.cpp" />
     <ClCompile Include="DirHandler.cpp" />
     <ClCompile Include="DirIterator.cpp" />
@@ -95,6 +99,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Program Files (x86)\Visual Leak Detector\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files (x86)\Visual Leak Detector\lib\Win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>

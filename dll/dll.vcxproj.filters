@@ -111,6 +111,12 @@
     <ClInclude Include="VirtualDisk.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="CommandChangeVolumn.h">
+      <Filter>command</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandPrompt.h">
+      <Filter>command</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MyString.cpp">
@@ -181,6 +187,12 @@
     </ClCompile>
     <ClCompile Include="VirtualDisk.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandChangeVolumn.cpp">
+      <Filter>command</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandPrompt.cpp">
+      <Filter>command</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

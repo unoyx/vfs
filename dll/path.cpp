@@ -95,8 +95,45 @@ bool match(const MyString& src, const MyString& pattern)
     return false;
 }
 
-// C:\
+
+// test first
 // \name
+bool isVolumnRelative(MyString path)
+{
+    if (path.startWith(_T("\\")))
+        return true;
+    return false;
+}
+
+// test second 
+// .
+// ..
+// .\
+// ..\
+// name
+bool isRelative(MyString path)
+{
+    assert(!path.isEmpty());
+    if (path.startWith(_T(".")))
+    {
+        return true;
+    }
+    else if (path.startWith(_T("\\")))
+    {
+        return true;
+    }
+    else
+    {
+        int pos = path.find(_T('\\'));
+        MyString head = path.substr(0, pos);
+        if (!head.isEmpty() && isLegalName(head))
+            return true;
+    }
+    return false;
+}
+
+// C:\\
+// test third
 bool isAbs(MyString path)
 {
     /*文件名需要忽略大小写 */
@@ -111,28 +148,6 @@ bool isAbs(MyString path)
     return false;
 }
 
-// .
-// ..
-// .\
-// ..\
-// name
-bool isRelative(MyString path)
-{
-    assert(!path.isEmpty());
-    if (path.startWith(_T(".")))
-    {
-        return true;
-    }
-    else
-    {
-        int pos = path.find(_T('\\'));
-        MyString head = path.substr(0, pos);
-        if (!head.isEmpty() && isLegalName(head))
-            return true;
-    }
-    return false;
-}
-
 bool isPath(MyString path)
 {
     return isAbs(path) || isRelative(path);
@@ -140,7 +155,7 @@ bool isPath(MyString path)
 
 bool isNormalizedPath(MyString path)
 {
-    if (isRelative(path))
+    if (isVolumnRelative(path) || isRelative(path))
     {
         return false;
     }
@@ -225,7 +240,9 @@ Vector<MyString> split(const MyString& path)
 
 MyString join(MyString path, MyString name)
 {
-    if (path[path.size() - 1] != _T('\\'))
+    if (path[path.size() - 1] != _T('\\') 
+        && !name.isEmpty() 
+        && !name.startWith(_T("\\")))
     {
         path += _T("\\");
     }

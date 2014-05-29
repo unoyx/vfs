@@ -8,8 +8,9 @@ class Vector;
 
 bool hasWildcard(const MyString& s);
 bool match(const MyString& src, const MyString& pattern);
-bool isAbs(MyString path);
+bool isVolumnRelative(MyString path);
 bool isRelative(MyString path);
+bool isAbs(MyString path);
 bool isPath(MyString path);
 bool isNormalizedPath(MyString path);
 bool isLegalChar(TCHAR c);

@@ -22,7 +22,7 @@ public:
 
     VolumnNode* addVolumn(MyString label);
     void removeVolumn(int i);
-    int findVolumn(MyString label);
+    int findVolumn(MyString label) const;
     VolumnNode* getVolumnRef(int i);
 
     FileHandler createFile(MyString path);
@@ -39,8 +39,10 @@ public:
     bool isDir(MyString path) const;
 
     int chdir(MyString path);
-    MyString pathNormalize(MyString path) const;
     MyString pwd(void) const;
+    int changeVolumn(MyString path);
+    MyString pwv(void) const;
+    MyString pathNormalize(MyString path) const;
 private:
     VirtualDiskNode(const VirtualDiskNode&);
     VirtualDiskNode& operator=(const VirtualDiskNode&);
@@ -48,7 +50,8 @@ private:
     /* 输入已被规范化的路径名 */
     DirNode* getDirNode(const MyString& path);
 
-    MyString m_pwd;
+    // 当前所工作的分区
+    MyString m_pwv;
     
     CommandFactory factory;
     Vector<VolumnNode> m_volumns;
