@@ -57,6 +57,10 @@ MyString::MyString(MyString&& s)
 
 MyString& MyString::operator=(MyString&& s)
 {
+    if (m_data)
+    {
+        delete m_data;
+    }
     m_data = s.m_data;
     m_size = s.m_size;
     s.m_data = nullptr;

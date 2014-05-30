@@ -10,5 +10,5 @@ DLLAPI IVirtualDiskProxy* GetVirtualDiskProxy(void)
 DLLAPI void ReleaseVirtualDiskProxy(IVirtualDiskProxy* disk)
 {
     assert(disk);
-    delete disk;
+    delete dynamic_cast<VirtualDiskNode*>(disk);
 }

@@ -8,9 +8,10 @@
 static int getPath(const MyString& cmd, int pos, MyString* p)
 {
     int i = pos;
-    while (i < cmd.size() && _istspace(cmd[i]))
+    while (i < cmd.size() && !_istgraph(cmd[i]))
         ++i;
     int j = i;
+    // 处理以双引号包括的路径
     if (cmd[j] == _T('"'))
     {
         ++j;
@@ -28,7 +29,7 @@ static int getPath(const MyString& cmd, int pos, MyString* p)
     }
     else
     {
-        while (j < cmd.size() && !_istspace(cmd[j]) && cmd[j] != _T('/'))
+        while (j < cmd.size() && _istgraph(cmd[j]) && cmd[j] != _T('/'))
             ++j;
         *p = cmd.substr(i, j - i);
         return j;
@@ -38,7 +39,7 @@ static int getPath(const MyString& cmd, int pos, MyString* p)
 static int getSwitch(const MyString& cmd, int pos, MyString* s)
 {
     int i = pos;
-    while (i < cmd.size() && _istspace(cmd[i]))
+    while (i < cmd.size() && !_istgraph(cmd[i]))
         ++i;
     // 仅有首个字符为"\"
     int j = i + 1;
@@ -52,7 +53,7 @@ static int getSwitch(const MyString& cmd, int pos, MyString* s)
 static int getCmd(const MyString& cmd, int pos, MyString* name)
 {
     int i = pos;
-    while (i < cmd.size() && _istspace(cmd[i]))
+    while (i < cmd.size() && !_istgraph(cmd[i]))
         ++i;
 
     int j = i;
@@ -84,7 +85,7 @@ int parse(const MyString& cmd, MyString* name, Vector<MyString>* pathes, Vector<
 
     for (; i < cmd.size();)
     {
-        if (_istspace(cmd[i]))
+        if (!_istgraph(cmd[i]))
         {
             ++i;
         }
