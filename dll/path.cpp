@@ -150,7 +150,7 @@ bool isAbs(MyString path)
 
 bool isPath(MyString path)
 {
-    return isAbs(path) || isRelative(path);
+    return isVolumnRelative(path) || isRelative(path) || isAbs(path);
 }
 
 bool isNormalizedPath(MyString path)
@@ -224,9 +224,12 @@ Vector<MyString> split(const MyString& path)
         int epos = path.find(_T('\\'), spos);
         if (epos != -1)
         {
+            int i = epos + 1;
+            while (i < path.size() && path[i] == _T('\\'))
+                ++i;
             MyString name(path.substr(spos, epos - spos));
             ret.append(name);
-            spos = epos + 1;
+            spos = i;
         }
         else if (spos < path.size())
         {

@@ -19,7 +19,7 @@ public:
     virtual const char* GetName();
     virtual ETYPE  GetType();
 	virtual IFindResult* Find(const char* findstr,bool bRecursion);
-    void find(const MyString& findstr, bool recursion, FindResult* result);
+    void find(MyString findstr, bool recursion, FindResult* result);
 
     state stat(void) const;
 

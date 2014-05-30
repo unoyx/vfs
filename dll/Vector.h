@@ -60,6 +60,8 @@ Vector<T>::Vector(Vector<T>&& v)
 template<typename T>
 Vector<T>& Vector<T>::operator=(Vector<T>&& v)
 {
+    if (m_data)
+        delete m_data;
     m_data = v.m_data;
     m_size = v.m_size;
     v.m_data = 0;

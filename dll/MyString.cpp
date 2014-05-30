@@ -140,7 +140,7 @@ MyString MyString::substr(int pos, int len) const
 
 int MyString::find(const TCHAR c, int pos) const
 {
-    assert(pos >= 0 && pos < m_size);
+    assert(pos >= 0);
     for (; pos < m_size; ++pos)
     {
         if (c == m_data[pos])
@@ -153,7 +153,7 @@ int MyString::find(const TCHAR c, int pos) const
 
 int MyString::find(const TCHAR* s, int pos) const
 {
-    assert(pos >= 0 && pos < m_size);
+    assert(pos >= 0);
     int len = _tcslen(s);
     for (; pos < m_size - len; ++pos)
     {

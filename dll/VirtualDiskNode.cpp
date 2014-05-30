@@ -390,44 +390,45 @@ MyString VirtualDiskNode::pwv(void) const
 // 不改变路径中的大小写情况
 MyString VirtualDiskNode::pathNormalize(MyString path) const
 {
-    MyString ret;
     if (!isPath(path))
     {
         assert(0);
-        return ret;
+        return path;
     }
     if (isVolumnRelative(path))
     {
-        ret = join(pwd().substr(0, 2), path);
+        path = join(pwd().substr(0, 2), path);
     }
     else if (isRelative(path))
     {
         if (path == _T("."))
         {
-            ret = pwd();
+            path = pwd();
         }
         else if (path == _T(".."))
         {
-            ret = dirname(pwd());
+            path = dirname(pwd());
         }
         else if (path.startWith(_T("..\\")))
         {
-            ret = dirname(pwd()) + path.substr(2);
+            path = dirname(pwd()) + path.substr(2);
         } 
         else if (path.startWith(_T(".\\")))
         {
-            ret = pwd() + path.substr(1);
+            path = pwd() + path.substr(1);
         }
         // 直接输入名字的情况
         else if (!match(path, _T("?:*")))
         {
-            ret = join(pwd(), path);
+            path = join(pwd(), path);
         }
-    } 
-
-    if (path.endWith(_T("\\")))
-    {
-        ret = ret.substr(0, ret.size() - 1);
     }
+    Vector<MyString> parts = split(path);
+    MyString ret = parts[0];
+    for (int i = 1; i < parts.size(); ++i)
+    {
+        ret = join(ret, parts[i]);
+    }
+
     return ret;
 }

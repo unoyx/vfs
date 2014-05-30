@@ -33,15 +33,15 @@ IFindResult* DirNode::Find(const char* findstr,bool bRecursion)
 }
 
 // 当前比较未忽略大小写
-void DirNode::find(const MyString& findstr, bool recursion, FindResult* result)
+void DirNode::find(MyString findstr, bool recursion, FindResult* result)
 {
     if (!result)
         return;
-
+    MyString str = findstr.toLower();
     for (int i = 0; i < m_files.size(); ++i)
     {
-        MyString name = m_files[i].stat().name;
-        if (match(name, findstr))
+        MyString name = m_files[i].stat().name.toLower();
+        if (match(name, str))
         {
             result->add(&m_files[i]);
         }
@@ -49,14 +49,14 @@ void DirNode::find(const MyString& findstr, bool recursion, FindResult* result)
 
     for (int i = 0; i < m_dirs.size(); ++i)
     {
-        MyString name = m_dirs[i].stat().name;
-        if (match(name, findstr))
+        MyString name = m_dirs[i].stat().name.toLower();
+        if (match(name, str))
         {
             result->add(&m_dirs[i]);
         }
         if (recursion)
         {
-            m_dirs[i].find(findstr, recursion, result);
+            m_dirs[i].find(str, recursion, result);
         }
     }    
 }

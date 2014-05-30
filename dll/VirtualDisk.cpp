@@ -3,7 +3,7 @@
 
 DLLAPI IVirtualDiskProxy* GetVirtualDiskProxy(void)
 {
-    IVirtualDiskProxy* ret = new VirtualDiskNode;
+    VirtualDiskNode* ret = new VirtualDiskNode;
     return ret;
 }
 

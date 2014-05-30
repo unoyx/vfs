@@ -105,9 +105,6 @@
     <ClInclude Include="VirtualDiskNode.h">
       <Filter>virtual_disk</Filter>
     </ClInclude>
-    <ClInclude Include="FindResult.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="VirtualDisk.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -116,6 +113,9 @@
     </ClInclude>
     <ClInclude Include="CommandPrompt.h">
       <Filter>command</Filter>
+    </ClInclude>
+    <ClInclude Include="FindResult.h">
+      <Filter>virtual_disk</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -182,9 +182,6 @@
     <ClCompile Include="VirtualDiskNode.cpp">
       <Filter>virtual_disk</Filter>
     </ClCompile>
-    <ClCompile Include="FindResult.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="VirtualDisk.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -193,6 +190,9 @@
     </ClCompile>
     <ClCompile Include="CommandPrompt.cpp">
       <Filter>command</Filter>
+    </ClCompile>
+    <ClCompile Include="FindResult.cpp">
+      <Filter>virtual_disk</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

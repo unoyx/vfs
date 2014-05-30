@@ -11,7 +11,7 @@ class VfsNode
 {
 public:
     explicit VfsNode(NodeType t);
-    ~VfsNode(void);
+    virtual ~VfsNode(void);
 
     inline void set_name(const MyString& name)
     {
