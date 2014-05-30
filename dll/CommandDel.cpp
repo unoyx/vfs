@@ -66,12 +66,12 @@ void CommandDel::del(MyString path, VirtualDiskNode* vfs)
     else if (hasWildcard(path))
     {
         MyString dir = dirname(path);
-        MyString wirdcard = basename(path);
+        MyString wirdcard = basename(path).toLower();
         DirHandler dirhandle = vfs->openDir(dir);
         for (DirIterator iter = dirhandle.getIterator(); !iter.isDone(); iter.next())
         {
             state s = iter.getItem();
-            if (s.type == FILE_TYPE && match(s.name, wirdcard))
+            if (s.type == FILE_TYPE && match(s.name.toLower(), wirdcard))
             {
                 vfs->deleteFile(s.path);
             }

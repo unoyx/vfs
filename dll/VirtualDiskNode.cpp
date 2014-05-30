@@ -17,10 +17,10 @@
 #endif
 
 VirtualDiskNode::VirtualDiskNode(void)
-    :m_pwv(_T("C:"))
+    :m_pwv(_T("c:"))
 {
-    (void)addVolumn(_T("C:"));
-    (void)addVolumn(_T("D:"));
+    (void)addVolumn(_T("c:"));
+    (void)addVolumn(_T("d:"));
 }
 
 VirtualDiskNode::~VirtualDiskNode(void)
@@ -31,6 +31,7 @@ int VirtualDiskNode::ExecCommand(const char* command)
 {
     try 
     {
+        _tprintf("%s\n", command);
         SmartPtr<CommandInterface> cmd = factory.create(command);
         if (!cmd.isValid())
         {
@@ -354,7 +355,7 @@ int VirtualDiskNode::chdir(MyString path)
         return -1;
     }
     VolumnNode* v = getVolumnRef(idx);
-    v->set_pwd(path.substr(2));
+    v->set_pwd(path.substr(2).toLower());
 
     return 0;
 }
@@ -378,7 +379,7 @@ int VirtualDiskNode::changeVolumn(MyString path)
     {
         return -1;
     }
-    m_pwv = path;
+    m_pwv = path.toLower();
     return 0;
 }
 

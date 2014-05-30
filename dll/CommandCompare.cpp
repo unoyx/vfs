@@ -7,7 +7,7 @@
 #include "VirtualDiskNode.h"
 #include "CommandException.h"
 
-const int CommandCompare::OUTPUT_BYTE = 17;
+const int CommandCompare::OUTPUT_BYTE = 16;
 
 CommandCompare::CommandCompare(void)
 {
@@ -92,7 +92,7 @@ void CommandCompare::exec(VirtualDiskNode* vfs)
             isDifferent = true;
         }
     }
-    if (!isDifferent) 
+    if (!isDifferent && (read_bytes == static_cast<DWORD>(dst_buf.size()))) 
     {
         _tprintf(_T("内容完全一致\n"));
         //delete[] src_buf;
@@ -118,6 +118,7 @@ void CommandCompare::exec(VirtualDiskNode* vfs)
         }
         output[OUTPUT_BYTE] = '\0';
     }
+    printf("%d", i);
     if (m_src.endWith(_T(".txt")) || m_src.endWith(_T(".bat")))
     {
         printf("%s\n", output);

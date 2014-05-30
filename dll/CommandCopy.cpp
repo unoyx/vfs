@@ -46,6 +46,16 @@ void CommandCopy::exec(VirtualDiskNode* vfs)
     {
         m_dst = vfs->pathNormalize(m_dst);
     }
+    
+    if (!hasWildcard(m_src) && !m_src.endWith(_T("\\")))
+    {
+        DWORD attri = GetFileAttributes(m_src.c_str());
+        if (attri & FILE_ATTRIBUTE_DIRECTORY)
+        {
+            m_src = join(m_src, _T("*"));
+        }
+    }
+
     if (hasWildcard(m_src))
     {
         WIN32_FIND_DATA find_data;

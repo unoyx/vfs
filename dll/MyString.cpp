@@ -201,14 +201,19 @@ bool MyString::endWith(const TCHAR* s) const
 MyString MyString::term(void)
 {
     int pos_s = 0;
-    for (; (pos_s < m_size) && _istspace(m_data[pos_s]); ++pos_s) 
+    for (; (pos_s < m_size)
+        && _istspace(m_data[pos_s]);
+        ++pos_s) 
     {}
 
-    int pos_e = m_size;
-    for (; (pos_e > 0) && (pos_e > pos_s) && _istspace(m_data[pos_e]); --pos_e)
+    int pos_e = m_size - 1;
+    for (; (pos_e > 0) 
+        && (pos_e > pos_s)
+        && _istspace(m_data[pos_e]);
+    --pos_e)
     {}
 
-    MyString ret(m_data + pos_s, pos_e - pos_s);
+    MyString ret(m_data + pos_s, pos_e - pos_s + 1);
     return ret;
 }
 

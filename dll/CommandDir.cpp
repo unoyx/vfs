@@ -152,7 +152,11 @@ void CommandDir::displayFileSize(int n, int length /*=0*/)
     }
     else
     {
-        length += static_cast<int>(log10(static_cast<float>(n)));
+        assert(n >= 0);
+        if (n > 0)
+            length += static_cast<int>(log10(static_cast<float>(n)));
+        else
+            length = 0;
         for (int i = 0; i < (MAX_SIZE - (length + FIELD_SIZE - 1)); ++i)
         {
             printf(" ");

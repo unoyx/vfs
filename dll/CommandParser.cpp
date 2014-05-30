@@ -1,6 +1,8 @@
 #include "CommandParser.h"
 #include <ctype.h>
 #include <stdio.h>
+#include <tchar.h>
+#include <locale.h>
 #include "path.h"
 #include "MyString.h"
 #include "Vector.h"
@@ -29,7 +31,9 @@ static int getPath(const MyString& cmd, int pos, MyString* p)
     }
     else
     {
-        while (j < cmd.size() && _istgraph(cmd[j]) && cmd[j] != _T('/'))
+        while (j < cmd.size() 
+            && !_istspace(cmd[j])
+            && cmd[j] != _T('/'))
             ++j;
         *p = cmd.substr(i, j - i);
         return j;
@@ -59,8 +63,8 @@ static int getCmd(const MyString& cmd, int pos, MyString* name)
     int j = i;
     while (j < cmd.size() && _istalpha(cmd[j]))
         ++j;
-    // 无法识别出命令名则回溯
-    if (j < cmd.size() && !_istspace(cmd[j]))
+    // 仅在识别出类似绝对路径时进行回溯
+    if (_istalpha(cmd[i]) && cmd[i + 1] == _T(':'))
         return i;
 
     *name = cmd.substr(i, j - i);

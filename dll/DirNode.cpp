@@ -28,6 +28,11 @@ ETYPE DirNode::GetType()
 IFindResult* DirNode::Find(const char* findstr,bool bRecursion)
 {
     FindResult* result = new FindResult;
+    if (!result)
+    {
+        assert(0);
+        return nullptr;
+    }
     find(findstr, bRecursion, result);
     return result;
 }

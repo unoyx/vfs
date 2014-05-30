@@ -36,7 +36,7 @@ void CommandChangeVolumn::exec(VirtualDiskNode* vfs)
     {
         m_volumn = vfs->pathNormalize(m_volumn);
     }
-    if (!vfs->findVolumn(m_volumn))
+    if (vfs->findVolumn(m_volumn.toLower()) == -1)
         throw CommandException(_T("不存在的卷标\n"));
     vfs->changeVolumn(m_volumn.substr(0, 2));
 }
