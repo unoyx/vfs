@@ -1,5 +1,4 @@
 #include "VfsNode.h"
-#include <assert.h>
 #include <time.h>
 #include "state.h"
 

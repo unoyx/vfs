@@ -81,7 +81,7 @@ void CommandCopy::exec(VirtualDiskNode* vfs)
                 MyString dst = join(dirname(m_dst), file_name);
                 if (copyFile(src, dst, vfs) == -1)
                 {
-                    assert(0);
+//                    assert(0);
                     continue;
                 }
             }
@@ -96,7 +96,7 @@ void CommandCopy::exec(VirtualDiskNode* vfs)
                 }
                 if (copyFile(src, dst, vfs) == -1)
                 {
-                    assert(0);
+//                    assert(0);
                     continue;
                 }
             }

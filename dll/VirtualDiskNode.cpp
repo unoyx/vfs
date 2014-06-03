@@ -31,7 +31,6 @@ int VirtualDiskNode::ExecCommand(const char* command)
 {
     try 
     {
-        _tprintf("%s\n", command);
         SmartPtr<CommandInterface> cmd = factory.create(command);
         if (!cmd.isValid())
         {
@@ -93,7 +92,6 @@ FileHandler VirtualDiskNode::createFile(MyString path)
 {
     if (!isNormalizedPath(path))
     {
-        assert(0);
         return FileHandler(nullptr);
     }
     MyString dir_path = dirname(path).toLower();
@@ -118,7 +116,6 @@ DirHandler VirtualDiskNode::createDir(MyString path)
 {
     if (!isNormalizedPath(path))
     {
-        assert(0);
         return DirHandler(nullptr);
     }
     MyString dir_path = dirname(path).toLower();
@@ -151,7 +148,6 @@ FileHandler VirtualDiskNode::openFile(MyString path)
 {
     if (!isNormalizedPath(path))
     {
-        assert(0);
         return FileHandler(nullptr);
     }
     path = path.toLower();
@@ -180,7 +176,6 @@ DirHandler VirtualDiskNode::openDir(MyString path)
 {
     if (!isNormalizedPath(path))
     {
-        assert(0);
         return DirHandler(nullptr);
     }
     path = path.toLower();
@@ -209,7 +204,6 @@ void VirtualDiskNode::deleteFile(MyString path)
 {
     if (!isNormalizedPath(path))
     {
-        assert(0);
         return;
     }
     path = path.toLower();
@@ -231,7 +225,6 @@ void VirtualDiskNode::deleteDir(MyString path)
 {
     if (!isNormalizedPath(path))
     {
-        assert(0);
         return;
     }
     path = path.toLower();
@@ -253,7 +246,6 @@ bool VirtualDiskNode::isExist(MyString path) const
 {
     if (!isNormalizedPath(path))
     {
-        assert(0);
         return false;
     }
     path = path.toLower();
@@ -278,7 +270,6 @@ bool VirtualDiskNode::isDir(MyString path) const
 {
     if (!isNormalizedPath(path))
     {
-        assert(0);
         return false;
     }
     path = path.toLower();
@@ -297,7 +288,6 @@ bool VirtualDiskNode::isFile(MyString path) const
 {
     if (!isNormalizedPath(path))
     {
-        assert(0);
         return false;
     }
     path = path.toLower();
@@ -312,7 +302,6 @@ bool VirtualDiskNode::isFile(MyString path) const
 
 DirNode* VirtualDiskNode::getDirNode(const MyString& path)
 {
-    assert(isNormalizedPath(path));
     Vector<MyString> dirnames = split(path);
     MyString label = dirnames[0];
     int idx = findVolumn(label);
@@ -393,7 +382,6 @@ MyString VirtualDiskNode::pathNormalize(MyString path) const
 {
     if (!isPath(path))
     {
-        assert(0);
         return path;
     }
     if (isVolumnRelative(path))

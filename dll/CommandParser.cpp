@@ -64,7 +64,7 @@ static int getCmd(const MyString& cmd, int pos, MyString* name)
     while (j < cmd.size() && _istalpha(cmd[j]))
         ++j;
     // 仅在识别出类似绝对路径时进行回溯
-    if (_istalpha(cmd[i]) && cmd[i + 1] == _T(':'))
+    if ((i + 1) < cmd.size() && _istalpha(cmd[i]) && cmd[i + 1] == _T(':'))
         return i;
 
     *name = cmd.substr(i, j - i);
@@ -73,7 +73,7 @@ static int getCmd(const MyString& cmd, int pos, MyString* name)
 
 int parse(const MyString& cmd, MyString* name, Vector<MyString>* pathes, Vector<MyString>* switches)
 {
-    if (pathes == nullptr || switches == nullptr)
+    if (name == nullptr || pathes == nullptr || switches == nullptr)
     {
         return -1;
     }

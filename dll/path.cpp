@@ -118,7 +118,10 @@ bool isVolumnRelative(MyString path)
 // name
 bool isRelative(MyString path)
 {
-    assert(!path.isEmpty());
+    if (path.isEmpty())
+    {
+        return false;
+    }
     if (path.startWith(_T(".")))
     {
         return true;
@@ -198,7 +201,10 @@ bool isLegalName(MyString name)
 
 MyString dirname(MyString path)
 {
-    assert(isPath(path));
+    if (!isPath(path))
+    {
+        return _T("");
+    }
     int pos = path.size() - 1;
     for (; pos >= 0 && path[pos] != _T('\\'); --pos)
     {
@@ -208,7 +214,10 @@ MyString dirname(MyString path)
 
 MyString basename(MyString path)
 {
-    assert(isPath(path));
+    if (!isPath(path))
+    {
+        return _T("");
+    }
     int pos = path.size() - 1;
     for (; pos >= 0 && path[pos] != _T('\\'); --pos)
     {
