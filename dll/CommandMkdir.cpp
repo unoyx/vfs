@@ -68,11 +68,7 @@ int CommandMkdir::mkdir(MyString path, VirtualDiskNode* vfs)
 {
     Vector<MyString> path_name = split(path);
     MyString p = path_name[0];
-    //if (vfs->isExist(p) && vfs->isFile(p))
-    //{
-    //    printf("子目录或文件 %s 已经存在\n", p.c_str());
-    //    return;
-    //}
+
     for (int i = 1; i < path_name.size(); ++i)
     {
         if (!isLegalName(path_name[i]))

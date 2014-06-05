@@ -68,7 +68,6 @@ void CommandCompare::exec(VirtualDiskNode* vfs)
         throw CommandException(_T("系统找不到指定的文件\n"));
     }
     DWORD file_size = GetFileSize(src_file, nullptr);
-//    char *src_buf = new char[file_size];
     DelegateMem<char> src_buf(new char[file_size]);
     DWORD read_bytes = 0;
     if (!ReadFile(src_file, 
@@ -78,7 +77,6 @@ void CommandCompare::exec(VirtualDiskNode* vfs)
                   nullptr)
         || read_bytes != file_size)
     {
-        // delete[] src_buf;
         CloseHandle(src_file);
         throw CommandException(m_src + _T("文件读取失败\n"));
     }

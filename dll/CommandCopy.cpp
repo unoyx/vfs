@@ -81,7 +81,6 @@ void CommandCopy::exec(VirtualDiskNode* vfs)
                 MyString dst = join(dirname(m_dst), file_name);
                 if (copyFile(src, dst, vfs) == -1)
                 {
-//                    assert(0);
                     continue;
                 }
             }
@@ -95,7 +94,6 @@ void CommandCopy::exec(VirtualDiskNode* vfs)
                 }
                 if (copyFile(src, dst, vfs) == -1)
                 {
-//                    assert(0);
                     continue;
                 }
             }
@@ -162,7 +160,6 @@ int CommandCopy::copyFile(MyString src, MyString dst, VirtualDiskNode* vfs)
         dst_file = vfs->openFile(dst);
         if (!dst_file.isValid())
         {
-            //delete[] src_buf;
             CloseHandle(src_file);
             throw CommandException(_T("无法打开/创建目标文件\n"));
         }

@@ -58,10 +58,7 @@ void CommandCd::exec(VirtualDiskNode* vfs)
         m_path = vfs->pathNormalize(m_path);
     }
     m_path = m_path.toLower();
-    //if (!m_path.startWith(_T("c:")))
-    //{
-    //    throw CommandException(_T("系统找不到指定的驱动器\n"));
-    //}
+
     if (!vfs->isDir(m_path))
     {
         throw CommandException(_T("系统找不到指定的目录\n"));

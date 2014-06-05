@@ -64,11 +64,6 @@ void CommandRmdir::exec(VirtualDiskNode* vfs)
         {
             path = vfs->pathNormalize(path);
         }
-        //if (vfs->pwd().startWith(path))
-        //{
-        //    _tprintf(_T("另一个程序正在使用此文件，进程无法访问。\n"));
-        //    continue;
-        //}
         if (!vfs->isExist(path) || !vfs->isDir(path))
         {
             throw CommandException(_T("系统找不到指定的目录\n"));
