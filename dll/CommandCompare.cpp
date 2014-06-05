@@ -112,9 +112,9 @@ void CommandCompare::exec(VirtualDiskNode* vfs)
     }
     else
     {
-        for (int j = (i - OUTPUT_BYTE); j < i; ++j)
+        for (int j = 0; j < OUTPUT_BYTE; ++j)
         {
-            output[j] = dst_buf[j];
+            output[j] = dst_buf[i - OUTPUT_BYTE + j];
         }
         output[OUTPUT_BYTE] = '\0';
     }

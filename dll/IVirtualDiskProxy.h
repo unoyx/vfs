@@ -13,12 +13,13 @@ public:
 	virtual ETYPE  GetType()=0;
 };
 
-class IFindResult
+class IFindResult 
 {
 public:
 	virtual void Release()=0;
 	virtual unsigned int GetCount()=0;   
 	virtual IDiskObj* GetItemByIdx(unsigned int)=0;
+    virtual void display(void)=0;
 };
 
 class IDirProxy:public IDiskObj

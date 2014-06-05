@@ -5,6 +5,7 @@
 #include "state.h"
 #include "path.h"
 #include "VirtualDiskNode.h"
+#include "FileHandler.h"
 #include "DirHandler.h"
 #include "DirIterator.h"
 #include "CommandException.h"
@@ -69,20 +70,53 @@ void CommandDir::exec(VirtualDiskNode* vfs)
             path = vfs->pathNormalize(path);
         }
         path = path.toLower();
-        if (!vfs->isExist(path) || !vfs->isDir(path))
+        if (!vfs->isExist(path))
         {
             throw CommandException(_T("系统找不到指定路径\n"));
         }
-        if (m_recursive)
+        if (vfs->isFile(path))
         {
-            listDirRecursive(path, vfs, m_only_dir);
+            FileHandler file_handler = vfs->openFile(path);
+            state s = file_handler.stat();
+            displayState(s, false);
+            _tprintf(_T("%15d 个文件%14d 字节\n"), 1, s.size);
+            _tprintf(_T("%15d 个目录\n"), 0);
         }
-        else
+        if (vfs->isDir(path))
         {
-            listDir(path, vfs, m_only_dir);
+            if (m_recursive)
+            {
+                listDirRecursive(path, vfs, m_only_dir);
+            }
+            else
+            {
+                listDir(path, vfs, m_only_dir);
+            }
         }
     }
     return;
+}
+
+void CommandDir::displayState(state s, bool only_dir)
+{
+    static const int BUF_SIZE = 80;
+    char buf[BUF_SIZE] = {0};
+    tm t = {0};
+    localtime_s(&t, &s.ctime);
+    //                            两个空格
+    strftime(buf, BUF_SIZE, "%Y/%m/%d  %H:%M", &t);
+    printf("%s", buf);
+
+    if (s.type == FILE_TYPE && !only_dir)
+    {
+        displayFileSize(s.size);
+        _tprintf(_T(" %s\n"), s.name.c_str());
+    }
+    else if (s.type == DIR_TYPE)
+    {
+         //         三个空格   六个空格
+        _tprintf(_T("   <DIR>      %s\n"), s.name.c_str());
+    }
 }
 
 void CommandDir::listDir(const MyString& path, VirtualDiskNode* vfs, bool only_dir /*= false*/)
@@ -96,27 +130,17 @@ void CommandDir::listDir(const MyString& path, VirtualDiskNode* vfs, bool only_d
         state s = iter.getItem();
         if (s.type == FILE_TYPE && only_dir)
             continue;
-        // 输出时间用的缓冲区长度
-        static const int BUF_SIZE = 80;
-        char buf[BUF_SIZE] = {0};
-        tm t = {0};
-        localtime_s(&t, &s.ctime);
-        //                            两个空格
-        strftime(buf, BUF_SIZE, "%Y/%m/%d  %H:%M", &t);
-        printf("%s", buf);
+        displayState(s, only_dir);
 
         if (s.type == FILE_TYPE && !only_dir)
         {
             ++file_count;
             file_size += s.size;
-            displayFileSize(s.size);
-            _tprintf(_T(" %s\n"), s.name.c_str());
         }
         else if (s.type == DIR_TYPE)
         {
             ++dir_count;
             //         三个空格   六个空格
-            _tprintf(_T("   <DIR>      %s\n"), s.name.c_str());
         }
     }
     _tprintf(_T("%15d 个文件%14d 字节\n"), file_count, file_size);

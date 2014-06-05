@@ -43,7 +43,6 @@ bool match(const MyString& src, const MyString& pattern)
             else
             {
                 ++j;
-//                int next_i = skipToEqual(src, i + 1, pattern[j]);
                 int next_i = src.size() - 1;
                 while (next_i > i && src[next_i] != pattern[j])
                 {

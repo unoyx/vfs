@@ -67,6 +67,11 @@ void CommandDel::del(MyString path, VirtualDiskNode* vfs)
     {
         MyString dir = dirname(path);
         MyString wirdcard = basename(path).toLower();
+        if (dir.isEmpty())
+        {
+            dir = vfs->pwd();
+            wirdcard = path.toLower();
+        }
         DirHandler dirhandle = vfs->openDir(dir);
         for (DirIterator iter = dirhandle.getIterator(); !iter.isDone(); iter.next())
         {
@@ -74,6 +79,10 @@ void CommandDel::del(MyString path, VirtualDiskNode* vfs)
             if (s.type == FILE_TYPE && match(s.name.toLower(), wirdcard))
             {
                 vfs->deleteFile(s.path);
+            }
+            if (s.type == DIR_TYPE && m_recursion && !s.name.startWith(_T(".")))
+            {
+                del(join(s.path, wirdcard), vfs);
             }
         }
     }
@@ -84,7 +93,7 @@ void CommandDel::del(MyString path, VirtualDiskNode* vfs)
         _tscanf_s(_T("%c%*c"), &confirm, sizeof(confirm));
         if (confirm != 'y' && confirm != 'Y')
         {
-            return;
+            throw CommandException(_T(""));
         }
 
         DirHandler dir = vfs->openDir(path);

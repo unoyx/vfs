@@ -18,7 +18,10 @@ public:
     void close(void);
     state stat(void);
     Vector<char> read(void);
+    void clear(void);
     void write(const char* buf, int len);
+    void append(const char* buf, int len);
+    void extend(int s);
 private:
     FileNode* m_file;
 };

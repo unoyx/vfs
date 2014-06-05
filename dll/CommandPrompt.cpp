@@ -35,5 +35,5 @@ void CommandPrompt::setSwitches(const Vector<MyString>& switches)
 
 void CommandPrompt::exec(VirtualDiskNode* vfs)
 {
-    _tprintf("%s\\>", vfs->pwd());
+    _tprintf("%s\\>", vfs->pwd().c_str());
 }

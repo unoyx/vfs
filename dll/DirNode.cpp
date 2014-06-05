@@ -17,7 +17,9 @@ DirNode::~DirNode(void)
 
 const char* DirNode::GetName()
 {
-    return get_name().c_str();
+    static MyString name;
+    name = get_name();
+    return name.c_str();
 }
 
 ETYPE DirNode::GetType()
@@ -32,6 +34,11 @@ IFindResult* DirNode::Find(const char* findstr,bool bRecursion)
     {
         assert(0);
         return nullptr;
+    }
+    MyString name = this->get_name();
+    if (match(name.toLower(), MyString(findstr)))
+    {
+//        result->add(this);
     }
     find(findstr, bRecursion, result);
     return result;
@@ -55,6 +62,8 @@ void DirNode::find(MyString findstr, bool recursion, FindResult* result)
     for (int i = 0; i < m_dirs.size(); ++i)
     {
         MyString name = m_dirs[i].stat().name.toLower();
+        if (name == _T(".") || name == _T(".."))
+            continue;
         if (match(name, str))
         {
             result->add(&m_dirs[i]);

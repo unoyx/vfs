@@ -4,6 +4,7 @@
 #include "Vector.h"
 
 class MyString;
+struct state;
 
 class CommandDir : public CommandInterface
 {
@@ -15,6 +16,7 @@ public:
     virtual void setSwitches(const Vector<MyString>& switches);
     virtual void exec(VirtualDiskNode* vfs);
 private:
+    void displayState(state s, bool only_dir);
     void listDir(const MyString& path, VirtualDiskNode* vfs, bool only_dir = false);
     void listDirRecursive(const MyString& path, VirtualDiskNode* vfs, bool only_dir = false);
     void displayFileSize(int n, int length = 0);

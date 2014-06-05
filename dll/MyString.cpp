@@ -154,8 +154,8 @@ int MyString::find(const TCHAR c, int pos) const
 int MyString::find(const TCHAR* s, int pos) const
 {
     assert(pos >= 0);
-    int len = _tcslen(s);
-    for (; pos < m_size - len; ++pos)
+    size_t len = _tcslen(s);
+    for (; static_cast<size_t>(pos) < m_size - len; ++pos)
     {
         if (memcmp(m_data + pos, s, len * sizeof(TCHAR)) == 0)
         {
@@ -185,7 +185,7 @@ bool MyString::startWith(const MyString& s) const
 
 bool MyString::startWith(const TCHAR* s) const
 {
-    return substr(0, _tcslen(s)) == s;
+    return substr(0, static_cast<int>(_tcslen(s))) == s;
 }
 
 bool MyString::endWith(const MyString& s) const
@@ -195,7 +195,7 @@ bool MyString::endWith(const MyString& s) const
 
 bool MyString::endWith(const TCHAR* s) const
 {
-    return substr(m_size - _tcslen(s)) == s;
+    return substr(m_size - static_cast<int>(_tcslen(s))) == s;
 }
 
 MyString MyString::term(void)
@@ -222,7 +222,7 @@ MyString MyString::toLower(void)
     MyString ret(*this);
     for (int i = 0; i < ret.size(); ++i)
     {
-        if (isupper(ret[i]))
+        if (_istupper(ret[i]))
         {
             ret[i] = _tolower(ret[i]);
         }

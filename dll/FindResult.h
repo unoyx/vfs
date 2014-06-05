@@ -15,6 +15,7 @@ public:
 
     void add(IDiskObj* ref);
     void merge(const FindResult& rhs);
+    virtual void display(void);
 private:
     FindResult(const FindResult&);
     FindResult& operator=(const FindResult&);

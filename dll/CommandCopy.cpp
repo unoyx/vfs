@@ -62,7 +62,7 @@ void CommandCopy::exec(VirtualDiskNode* vfs)
         HANDLE find_iter = FindFirstFile(m_src.c_str(), &find_data);
         if (find_iter == INVALID_HANDLE_VALUE)
         {
-            _tprintf(_T("系统找不到指定的文件\n"));
+            throw CommandException(_T("系统找不到指定的文件\n"));
         }
         do 
         {
@@ -75,7 +75,7 @@ void CommandCopy::exec(VirtualDiskNode* vfs)
             {
                 if (!match(file_name, basename(m_dst)))
                 {
-                    continue;
+                    throw CommandException(_T("文件:\"") + file_name + _T("\"复制失败\n"));
                 }
                 MyString src = join(dirname(m_src), file_name);
                 MyString dst = join(dirname(m_dst), file_name);
@@ -91,8 +91,7 @@ void CommandCopy::exec(VirtualDiskNode* vfs)
                 MyString dst = join(m_dst, file_name);
                 if (!vfs->isDir(m_dst))
                 {
-                    _tprintf(_T("系统找不到指定的目录\n"));
-                    continue;
+                    throw CommandException(_T("系统找不到指定的目录\n"));
                 }
                 if (copyFile(src, dst, vfs) == -1)
                 {
@@ -105,6 +104,15 @@ void CommandCopy::exec(VirtualDiskNode* vfs)
     }
     else
     {
+        if (hasWildcard(m_dst))
+        {
+            MyString pattern = basename(m_dst);
+            if (!match(basename(m_src), pattern))
+            {
+                return;
+            }
+            m_dst = dirname(m_dst);
+        }
         if (vfs->isDir(m_dst))
         {
             m_dst = join(m_dst, basename(m_src));
@@ -124,6 +132,7 @@ void CommandCopy::exec(VirtualDiskNode* vfs)
 
 int CommandCopy::copyFile(MyString src, MyString dst, VirtualDiskNode* vfs)
 {
+    static const int BUF_SIZE = 1024 * 1024 * 10;
     HANDLE src_file = CreateFile(src.c_str(),
                                  GENERIC_READ,
                                  FILE_SHARE_READ,
@@ -135,21 +144,9 @@ int CommandCopy::copyFile(MyString src, MyString dst, VirtualDiskNode* vfs)
     {
         throw CommandException(_T("系统找不到指定的文件\n"));
     }
-    DWORD file_size = GetFileSize(src_file, nullptr);
-    //CHAR *src_buf = new CHAR[file_size];
-    DelegateMem<char> src_buf(new char[file_size]);
-    DWORD read_bytes = 0;
-    if (!ReadFile(src_file, 
-                  src_buf,
-                  file_size,
-                  &read_bytes,
-                  nullptr)
-        || file_size != read_bytes)
-    {
-        //delete[] src_buf;
-        CloseHandle(src_file);
-        throw CommandException(src + _T("文件读取失败\n"));
-    }
+    LARGE_INTEGER file_size;
+    memset(&file_size, 0, sizeof(file_size));
+    (void)GetFileSizeEx(src_file, &file_size);
 
     FileHandler dst_file(nullptr);
     if (vfs->isFile(dst))
@@ -159,7 +156,7 @@ int CommandCopy::copyFile(MyString src, MyString dst, VirtualDiskNode* vfs)
         _tscanf_s(_T("%c%*c"), &confirm, sizeof(confirm));
         if (confirm != 'y' && confirm != 'Y')
         {
-            return 0;
+            throw CommandException(_T(""));
         }
         dst_file = vfs->openFile(dst);
         if (!dst_file.isValid())
@@ -177,10 +174,30 @@ int CommandCopy::copyFile(MyString src, MyString dst, VirtualDiskNode* vfs)
             CloseHandle(src_file);
             throw CommandException(_T("无法打开/创建目标文件\n"));
         }
+
     }
-    // TODO : 文件写入
-    dst_file.write(src_buf, file_size);
-    //delete[] src_file;
+    dst_file.clear();
+
+    LARGE_INTEGER res_bytes = file_size;
+    DelegateMem<char> src_buf(new char[BUF_SIZE]);
+    DWORD read_bytes = 0;
+    dst_file.extend(static_cast<int>(res_bytes.QuadPart));
+    while (res_bytes.QuadPart > 0)
+    {
+        memset(src_buf, 0, BUF_SIZE);
+        if (!ReadFile(src_file,
+                      src_buf,
+                      BUF_SIZE,
+                      &read_bytes,
+                      nullptr))
+        {
+            CloseHandle(src_file);
+            throw CommandException(src + _T("文件读取失败\n"));
+        }
+        dst_file.append(src_buf, read_bytes);
+        res_bytes.QuadPart -= read_bytes;
+    }
+    dst_file.close();
     CloseHandle(src_file);
     return 0;
 }

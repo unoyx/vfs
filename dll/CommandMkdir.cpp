@@ -20,6 +20,7 @@ void CommandMkdir::setPathes(const Vector<MyString>& pathes)
         throw CommandException(_T("命令语法不正确\n"));
     }
     m_pathes = pathes;
+
     return;
 }
 
@@ -40,6 +41,14 @@ void CommandMkdir::exec(VirtualDiskNode* vfs)
         if (!isNormalizedPath(path))
         {
             path = vfs->pathNormalize(path);
+        }
+        Vector<MyString> parts = split(path);
+        for (int i = 0; i < parts.size(); ++i)
+        {
+            if (!isLegalName(parts[i]) && (i != 0 || !match(parts[i], _T("?:"))))
+            {
+                throw CommandException(_T("目录名不能包含非法字符\n"));
+            }
         }
 
         if (!vfs->isExist(path))

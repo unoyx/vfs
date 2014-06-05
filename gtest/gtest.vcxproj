@@ -18,93 +18,33 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CommandCd.h" />
-    <ClInclude Include="CommandChangeVolumn.h" />
-    <ClInclude Include="CommandCompare.h" />
-    <ClInclude Include="CommandCopy.h" />
-    <ClInclude Include="CommandDel.h" />
-    <ClInclude Include="CommandDir.h" />
-    <ClInclude Include="CommandException.h" />
-    <ClInclude Include="CommandFactory.h" />
-    <ClInclude Include="CommandInterface.h" />
-    <ClInclude Include="CommandMkdir.h" />
-    <ClInclude Include="CommandParser.h" />
-    <ClInclude Include="CommandPrompt.h" />
-    <ClInclude Include="CommandRmdir.h" />
-    <ClInclude Include="DelegateMem.h" />
-    <ClInclude Include="DirHandler.h" />
-    <ClInclude Include="DirIterator.h" />
-    <ClInclude Include="DirNode.h" />
-    <ClInclude Include="FileHandler.h" />
-    <ClInclude Include="FileNode.h" />
-    <ClInclude Include="FindResult.h" />
-    <ClInclude Include="IVirtualDiskProxy.h" />
-    <ClInclude Include="MyString.h" />
-    <ClInclude Include="path.h" />
-    <ClInclude Include="SmartPtr.h" />
-    <ClInclude Include="state.h" />
-    <ClInclude Include="Vector.h" />
-    <ClInclude Include="VfsNode.h" />
-    <ClInclude Include="VirtualDiskNode.h" />
-    <ClInclude Include="VirtualDisk.h" />
-    <ClInclude Include="VolumnNode.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="CommandCd.cpp" />
-    <ClCompile Include="CommandChangeVolumn.cpp" />
-    <ClCompile Include="CommandCompare.cpp" />
-    <ClCompile Include="CommandCopy.cpp" />
-    <ClCompile Include="CommandDel.cpp" />
-    <ClCompile Include="CommandDir.cpp" />
-    <ClCompile Include="CommandException.cpp" />
-    <ClCompile Include="CommandFactory.cpp" />
-    <ClCompile Include="CommandInterface.cpp" />
-    <ClCompile Include="CommandMkdir.cpp" />
-    <ClCompile Include="CommandParser.cpp" />
-    <ClCompile Include="CommandPrompt.cpp" />
-    <ClCompile Include="CommandRmdir.cpp" />
-    <ClCompile Include="DirHandler.cpp" />
-    <ClCompile Include="DirIterator.cpp" />
-    <ClCompile Include="DirNode.cpp" />
-    <ClCompile Include="FileHandler.cpp" />
-    <ClCompile Include="FileNode.cpp" />
-    <ClCompile Include="FindResult.cpp" />
-    <ClCompile Include="MyString.cpp" />
-    <ClCompile Include="path.cpp" />
-    <ClCompile Include="VfsNode.cpp" />
-    <ClCompile Include="VirtualDiskNode.cpp" />
-    <ClCompile Include="VirtualDisk.cpp" />
-    <ClCompile Include="VolumnNode.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{75679833-9BE6-4A96-A9C6-7C73E3660E19}</ProjectGuid>
+    <ProjectGuid>{86362042-7A64-466C-9F6A-E750E35F673C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>dll</RootNamespace>
-    <ProjectName>dll</ProjectName>
+    <RootNamespace>gtest</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -124,13 +64,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Program Files (x86)\Visual Leak Detector\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files (x86)\Visual Leak Detector\lib\Win32;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\src\lib\gtest-1.7.0\include;D:\src\msvc\virtual_file_system\vfs\dll;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\src\lib\gtest-1.7.0\msvc\gtest-md\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Program Files (x86)\Visual Leak Detector\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Visual Leak Detector\lib\Win64;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\src\lib\gtest-1.7.0\include;D:\src\msvc\virtual_file_system\vfs\dll;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\src\lib\gtest-1.7.0\msvc\gtest-md\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -142,30 +82,28 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;DLL_EXPORTS;MATHFUNCSDLL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <LargeAddressAware>true</LargeAddressAware>
+      <AdditionalDependencies>gtestd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;DLL_EXPORTS;MATHFUNCSDLL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <LargeAddressAware>true</LargeAddressAware>
+      <AdditionalDependencies>gtestd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -176,10 +114,10 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;DLL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
@@ -193,15 +131,35 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;DLL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="cd_test.cpp" />
+    <ClCompile Include="common_testcase.cpp" />
+    <ClCompile Include="compare_test.cpp" />
+    <ClCompile Include="copy_test.cpp" />
+    <ClCompile Include="del_test.cpp" />
+    <ClCompile Include="dir_test.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="mkdir_test.cpp" />
+    <ClCompile Include="other_test.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\dll\dll.vcxproj">
+      <Project>{75679833-9be6-4a96-a9c6-7c73e3660e19}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\dll\VirtualDisk.h" />
+    <ClInclude Include="common_testcase.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

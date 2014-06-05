@@ -12,7 +12,9 @@ FileNode::~FileNode(void)
 
 const char* FileNode::GetName()
 {
-    return get_name().c_str();
+    static MyString name;
+    name = get_name();
+    return name.c_str();
 }
 
 ETYPE FileNode::GetType()

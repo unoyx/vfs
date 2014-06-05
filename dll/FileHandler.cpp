@@ -47,12 +47,23 @@ Vector<char> FileHandler::read(void)
     return m_file->m_content;
 }
 
+void FileHandler::clear(void)
+{
+    m_file->m_content.clear();
+}
+
 void FileHandler::write(const char* buf, int len)
 {
     m_file->m_content.clear();
-    for (int i = 0; i < len; ++i)
-    {
-        m_file->m_content.append(buf[i]);
-    }
+    m_file->m_content.append(buf, len);
 }
 
+void FileHandler::append(const char* buf, int len)
+{
+    m_file->m_content.append(buf, len);
+}
+
+void FileHandler::extend(int s)
+{
+    m_file->m_content.extend(s);
+}

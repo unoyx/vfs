@@ -10,7 +10,7 @@
 static int getPath(const MyString& cmd, int pos, MyString* p)
 {
     int i = pos;
-    while (i < cmd.size() && !_istgraph(cmd[i]))
+    while (i < cmd.size() && _istspace(cmd[i]))
         ++i;
     int j = i;
     // 处理以双引号包括的路径
@@ -85,11 +85,22 @@ int parse(const MyString& cmd, MyString* name, Vector<MyString>* pathes, Vector<
     if (i == cmd.size())
     {
         return 0;
-    } 
+    }
+    if (*name == _T("mkdir"))
+    {
+        while (_istspace(cmd[i]))
+            ++i;
+        int j = cmd.size() - 1;
+        while (_istspace(cmd[j]))
+            --j;
+        MyString path = cmd.substr(i, j - i + 1);
+        pathes->append(path);
+        return 0;
+    }
 
     for (; i < cmd.size();)
     {
-        if (!_istgraph(cmd[i]))
+        if (_istspace(cmd[i]))
         {
             ++i;
         }
@@ -97,7 +108,7 @@ int parse(const MyString& cmd, MyString* name, Vector<MyString>* pathes, Vector<
         {
             MyString path;
             i = getPath(cmd, i, &path);
-            if (!isPath(path))
+            if (!isPath(path) && !hasWildcard(path))
             {
                 printf("文件名、目录名或卷标语法不正确\n");
                 *name = _T("");
