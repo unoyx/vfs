@@ -44,6 +44,8 @@ int VirtualDiskNode::ExecCommand(const char* command)
         _tprintf(_T("%s"), msg.c_str());
         return 0;
     }
+    SmartPtr<CommandInterface> prompt = factory.create(_T("prompt"));
+    prompt->exec(this);
     return 1;
 }
 

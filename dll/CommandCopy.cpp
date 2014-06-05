@@ -101,6 +101,7 @@ void CommandCopy::exec(VirtualDiskNode* vfs)
             }
         }
         while (FindNextFile(find_iter, &find_data) != 0);
+        FindClose(find_iter);
     }
     else
     {

@@ -156,8 +156,8 @@ TEST_F(common_test,copyAndRmdir)
 	b = NULL;
 
 	//大文件测试
-//	ASSERT_NO_THROW(GetVDiskProxy()->ExecCommand("copy e:\\虚拟磁盘检查\\大文件\\1.28G.zip c:\\"));
-//	ASSERT_NO_THROW(GetVDiskProxy()->ExecCommand("copy e:\\虚拟磁盘检查\\大文件\\1.9G.zip c:\\"));
+	ASSERT_NO_THROW(GetVDiskProxy()->ExecCommand("copy e:\\虚拟磁盘检查\\大文件\\1.28G.zip c:\\"));
+	ASSERT_NO_THROW(GetVDiskProxy()->ExecCommand("copy e:\\虚拟磁盘检查\\大文件\\1.9G.zip c:\\"));
 
 	//删除目录失败测试
 
@@ -208,7 +208,7 @@ TEST_F(common_test,copyAndRmdir)
 	//清空目录，不对下一个测试案例造成影响
 	v=GetVDiskProxy()->ExecCommand("cd\\");
 	ASSERT_EQ(v,1);
-	v=GetVDiskProxy()->ExecCommand("rmdir/s \\");
+	v=GetVDiskProxy()->ExecCommand("rmdir/s");
 	ASSERT_EQ(v,1);
 	findres = rootdir->Find("*",true);
 	ASSERT_EQ(findres->GetCount(),0);

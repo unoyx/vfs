@@ -14,7 +14,7 @@
 extern "C"
 {
     DLLAPI IVirtualDiskProxy* GetVirtualDiskProxy(void);
-    DLLAPI void ReleaseVirtualDiskProxy(IVirtualDiskProxy* disk);
+    DLLAPI void ReleaseVirtualDiskProxy(void);
 };
 
 #endif // _VIRTUAL_DISK_H_

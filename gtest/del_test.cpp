@@ -48,7 +48,6 @@ TEST_F(common_test,del)
 //    ASSERT_EQ(v, 0);
 	auto rootdir=GetVDiskProxy()->GetVolumnByIdx(0)->GetRootDir();
 	auto findres=rootdir->Find("*",true);
-    findres->display();
 	ASSERT_EQ(findres->GetCount(),3);
 	findres->Release();
 	
@@ -60,7 +59,6 @@ TEST_F(common_test,del)
 	v=GetVDiskProxy()->ExecCommand("copy e:\\虚拟磁盘检查\\单个文件\\a.txt a\\b\\c\\*");
 	ASSERT_EQ(v,1);
 	findres=rootdir->Find("a.txt",true);
-    findres->display();
 	ASSERT_EQ(findres->GetCount(),1);
 	findres->Release();
 	v=GetVDiskProxy()->ExecCommand("del a\\b\\c\\a.txt");
@@ -107,7 +105,6 @@ TEST_F(common_test,del)
 	v=GetVDiskProxy()->ExecCommand("copy e:\\虚拟磁盘检查\\通配符\\*.txt a\\");
 	ASSERT_EQ(v,1);
 	findres=rootdir->Find("*.txt",true);
-    findres->display();
 	ASSERT_EQ(findres->GetCount(),5);
 	findres->Release();
 	v=GetVDiskProxy()->ExecCommand("copy e:\\虚拟磁盘检查\\通配符\\?.cc a\\");
@@ -129,7 +126,7 @@ TEST_F(common_test,del)
 	//参数测试
 	v=GetVDiskProxy()->ExecCommand("cd\\");
 	ASSERT_EQ(v,1);
-	v=GetVDiskProxy()->ExecCommand("rmdir/s \\");
+	v=GetVDiskProxy()->ExecCommand("rmdir/s");
 	ASSERT_EQ(v,1);
 	v=GetVDiskProxy()->ExecCommand("mkdir a\\b\\c");
 	ASSERT_EQ(v,1);
@@ -152,7 +149,7 @@ TEST_F(common_test,del)
 	//清空目录，不对下一个测试案例造成影响
 	v=GetVDiskProxy()->ExecCommand("cd\\");
 	ASSERT_EQ(v,1);
-	v=GetVDiskProxy()->ExecCommand("rmdir/s \\");
+	v=GetVDiskProxy()->ExecCommand("rmdir/s");
 	ASSERT_EQ(v,1);
 	findres = rootdir->Find("*",true);
 	ASSERT_EQ(findres->GetCount(),0);

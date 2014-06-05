@@ -1,14 +1,16 @@
 #include "VirtualDisk.h"
 #include "VirtualDiskNode.h"
 
+static VirtualDiskNode* disk = new VirtualDiskNode;
+
 DLLAPI IVirtualDiskProxy* GetVirtualDiskProxy(void)
 {
-    VirtualDiskNode* ret = new VirtualDiskNode;
-    return ret;
+    return disk;
 }
 
-DLLAPI void ReleaseVirtualDiskProxy(IVirtualDiskProxy* disk)
+DLLAPI void ReleaseVirtualDiskProxy(void)
 {
     assert(disk);
     delete dynamic_cast<VirtualDiskNode*>(disk);
+    disk = nullptr;
 }

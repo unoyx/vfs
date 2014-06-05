@@ -20,7 +20,7 @@ void unload_dll()
 //	if(hdll)
 //        FreeModule(hdll);
 //		FreeLibrary(hdll);
-    ReleaseVirtualDiskProxy(gIvdp);
+    ReleaseVirtualDiskProxy();
 
 
 

@@ -134,7 +134,7 @@ TEST_F(common_test,cd)
 	//清空目录，不对下一个测试案例造成影响
 	v=GetVDiskProxy()->ExecCommand("cd\\");
 	ASSERT_EQ(v,1);
-	v=GetVDiskProxy()->ExecCommand("rmdir/s \\");
+	v=GetVDiskProxy()->ExecCommand("rmdir/s");
 	ASSERT_EQ(v,1);
 	findres = rootdir->Find("*",true);
 	ASSERT_EQ(findres->GetCount(),0);

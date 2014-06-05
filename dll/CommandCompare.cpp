@@ -100,7 +100,7 @@ void CommandCompare::exec(VirtualDiskNode* vfs)
         CloseHandle(src_file);
         return;
     }
-
+    --i;
     char output[OUTPUT_BYTE + 1] = {0};
     if (i < OUTPUT_BYTE)
     {

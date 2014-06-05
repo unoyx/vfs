@@ -22,7 +22,6 @@ public:
 private:
     Vector<char> m_content;
     friend class FileHandler;
-    //friend class VirtualFileSystem;
 };
 
 #endif

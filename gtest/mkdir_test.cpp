@@ -65,12 +65,16 @@ TEST_F(common_test,mkdir1)
 	auto findres2=rootdir->Find("a",false);
 	IDirProxy* a=(IDirProxy*)findres2->GetItemByIdx(0);
 	EXPECT_EQ(a!=0,true);
-    // ????
-    a->Find("*",false)->display();
-	ASSERT_EQ(a->Find("*",false)->GetCount(),2);
-	findres2->Release();
-	ASSERT_EQ(a->Find("测试*",true)->GetCount(),3);
-	findres2->Release();
+    findres2->Release();
+    
+    // result is 2 not 3
+    auto findres3 = a->Find("*", false);
+	ASSERT_EQ(findres3->GetCount(),2);
+    findres3->Release();
+
+	auto findres4 = a->Find("测试*", true);
+	ASSERT_EQ(findres4->GetCount(),3);
+	findres4->Release();
 
 	//测试带空格的目录
 
