@@ -13,7 +13,7 @@
 #include "VolumnNode.h"
 
 #ifdef _DEBUG
-#include "vld.h"
+//#include "vld.h"
 #endif
 
 VirtualDiskNode::VirtualDiskNode(void)
