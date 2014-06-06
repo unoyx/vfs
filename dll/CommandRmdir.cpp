@@ -73,38 +73,36 @@ void CommandRmdir::exec(VirtualDiskNode* vfs)
             _tprintf(_T("删除目录%s 是否确认<Y/N>?"), m_pathes[i].c_str());
             TCHAR comfirm = false;
             _tscanf_s(_T("%c%*c"), &comfirm, sizeof(comfirm));
-            if (comfirm == 'Y' || comfirm == 'y')
+            if (comfirm != _T('Y') && comfirm != _T('y'))
+                continue;
+            MyString dir = dirname(path);
+            MyString base = basename(path);
+            if (base.isEmpty())
             {
-                MyString dir = dirname(path);
-                MyString base = basename(path);
-                if (base.isEmpty())
+                for (DirIterator iter = vfs->openDir(dir).getIterator(); !iter.isDone(); iter.next())
                 {
-                    for (DirIterator iter = vfs->openDir(dir).getIterator(); !iter.isDone(); iter.next())
+                    state s = iter.getItem();
+                    if (s.name.startWith(_T(".")))
+                        continue;
+                    if (s.type == DIR_TYPE)
                     {
-                        state s = iter.getItem();
-                        if (!s.name.startWith(_T(".")))
-                        {
-                            if (s.type == DIR_TYPE)
-                            {
-                                vfs->deleteDir(s.path);
-                            }
-                            else if(s.type == FILE_TYPE)
-                            {
-                                vfs->deleteFile(s.path);
-                            }
-                        }
+                        vfs->deleteDir(s.path);
+                    }
+                    else if(s.type == FILE_TYPE)
+                    {
+                        vfs->deleteFile(s.path);
                     }
                 }
-                else
-                {
-                    vfs->deleteDir(path);
-                }
+            }
+            else
+            {
+                vfs->deleteDir(path);
             }
         }
         else
         {
             DirHandler dir = vfs->openDir(path);
-            if (dir.isEmpty() && !(basename(path).isEmpty()))
+            if (dir.isEmpty() && !basename(path).isEmpty())
             {
                 dir.close();
                 vfs->deleteDir(path);

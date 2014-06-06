@@ -11,8 +11,8 @@
 #include "CommandException.h"
 
 CommandDir::CommandDir(void)
-    :m_recursive(false),
-    m_only_dir(false)
+    :m_only_dir(false),
+    m_recursive(false)
 {
 }
 

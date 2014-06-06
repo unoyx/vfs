@@ -11,7 +11,7 @@ class CommandFactory
 public:
     CommandFactory(void);
     ~CommandFactory(void);
-    SmartPtr<CommandInterface> create(const MyString& cmd_name);
+    static SmartPtr<CommandInterface> create(const MyString& cmd_name);
 };
 
 #endif
